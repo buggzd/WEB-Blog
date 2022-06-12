@@ -33,8 +33,8 @@ public class TpyeController {
         return "/admin/types";
     }
     @GetMapping("/types/input")
-    public String input(){
-        //model.addAttribute("type",new Type());
+    public String input(Model model){
+        model.addAttribute("type",new Type());
         return "/admin/types-creat";
     }
     @GetMapping("/types/{id}/input")
