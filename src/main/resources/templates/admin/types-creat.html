@@ -56,8 +56,8 @@
     <div class="D-padded-tb-large D-container-small">
        <div class="ui container">
 <!--           head-->
-           <form action="#"method="post" th:action="@{/admin/types}" class="ui segment form">
-
+           <form action="#"method="post" th:object="${type}" th:action="*{id}==null ? @{/admin/types} : @{/admin/types/{id}(id=*{id})}" class="ui segment form">
+               <input type="hidden" name="id" th:value="*{id}">
 
                <div class="required field">
                    <div class="ui left labeled input">名称</div>

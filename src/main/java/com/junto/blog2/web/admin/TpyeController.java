@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,6 +37,11 @@ public class TpyeController {
         //model.addAttribute("type",new Type());
         return "/admin/types-creat";
     }
+    @GetMapping("/types/{id}/input")
+    public String editInput(@PathVariable Long id, Model model){
+        model.addAttribute("type",typeService.getType(id));
+        return "/admin/types-creat";
+    }
     @PostMapping("/types")
     public String post(Type type,RedirectAttributes attributes){
 //        if(result.hasErrors()){
@@ -46,6 +52,20 @@ public class TpyeController {
             attributes.addFlashAttribute("message","添加失败");
         }else {
             attributes.addFlashAttribute("message","添加成功");
+        }
+        return "redirect:/admin/types";
+    }
+
+    @PostMapping("/types/{id}")
+    public String editpost(Type type,RedirectAttributes attributes,@PathVariable Long id){
+//        if(result.hasErrors()){
+//            return "/admin/types-creat";
+//        }
+        Type t=typeService.updateType(id,type);
+        if(t==null){
+            attributes.addFlashAttribute("message","修改失败");
+        }else {
+            attributes.addFlashAttribute("message","修改成功");
         }
         return "redirect:/admin/types";
     }
