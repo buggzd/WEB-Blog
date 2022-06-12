@@ -69,4 +69,13 @@ public class TpyeController {
         }
         return "redirect:/admin/types";
     }
+    @GetMapping("/types/{id}/delete")
+    public String delete(@PathVariable Long id,RedirectAttributes attributes){
+//        if(result.hasErrors()){
+//            return "/admin/types-creat";
+//        }
+        typeService.deletType(id);
+        attributes.addFlashAttribute("message","删除成功");
+        return "redirect:/admin/types";
+    }
 }
