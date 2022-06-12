@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--手机端布局-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签管理</title>
+<!--引入semantic-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/directorStyle.css">
+
+
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment D-padded-tb-mini D-shadow-small">
+         <div class="ui container">
+             <div class="ui inverted secondary stackable menu">
+                 <h2 class="ui teal header item">Blog</h2>
+                 <a href="#" class="active D-item item D-mobile-hide"><i class="home icon"></i>博客</a>
+                 <a href="#" class="D-item item D-mobile-hide"><i class="idea icon"></i>分类</a>
+                 <a href="#" class="D-item item D-mobile-hide"><i class="tags icon"></i>标签</a>
+                 <div class="D-item D-mobile-hide right menu">
+                     <div class="ui dropdown item">
+                         <img src="../../static/images/server-icon.png" th:src="@{/images/server-icon.png}" alt="" class="ui avatar image">
+                         junto
+                         <i class="dropdown icon"></i>
+                         <div class="menu">
+                             <a href="#" class="item">注销</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <a href="#" class="ui menu toggle black icon button D-position-right-top D-mobile-show">
+             <i class="sidebar icon"></i>
+         </a>
+     </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" class="item">发布</a>
+                <a href="#" class="teal active item">列表</a>
+            </div>
+        </div>
+    </div>
+    <!--中间内容-->
+    <div class="D-padded-tb-large D-container-small">
+       <div class="ui container">
+<!--           head-->
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">添加成功！</p>
+            </div>
+
+            <table class="ui table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>分类名称</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="type,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${type.name}">MEME</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini basic teal button">编辑</a>
+                        <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini basic red button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="6" >
+                        <div class="ui pagination menu"th:if="${page.totalPages}>1">
+                            <!--                                上一页-->
+                            <a th:href="@{/admin/types(page=${page.number}-1)}" class="icon item" th:unless="${page.first}">
+                                <i class="left chevron icon"></i>
+                            </a>
+                            <!--                                下一页-->
+                            <a th:href="@{/admin/types(page=${page.number}+1)}" class="icon item" th:unless="${page.last}">
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                        <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+       </div>
+    </div>
+
+    <!--底部footer-->
+    <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment D-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column ">
+                    <ui class="ui inverted link list">
+                        <div class="item ">
+                            <img src="../../static/images/server-icon.png" class="ui rounded image " style="width: 100px" alt="">
+                        </div>
+                    </ui>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="" class="item">MEME</a>
+                        <a href="" class="item">技术相关</a>
+                        <a href="" class="item">生活相关</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="" class="item">MEME</a>
+                        <a href="" class="item">技术相关</a>
+                        <a href="" class="item">生活相关</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">关于</h4>
+                    <p class="D-text-thin D-text-spaced D-opacity-mini">这里是我的个人博客，偶尔会在上面发布一些好玩的有趣的东西，也会有一些技术学习笔记，欢迎你朋友。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider">
+                <p class="D-text-thin D-text-spaced D-opacity-mini">Copyright©2022-2023 Designed by junto  </p>
+            </div>
+        </div>
+    </footer>
+<!--使用cdn引入jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!--引入semantic-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <script>
+        $('.message .close').on('click',function (){
+           $(this)
+               .closest('.message')
+               .transition('fade');
+        });
+        $('.menu.toggle').click(function(){
+            $('.D-item').toggleClass('D-mobile-hide');
+        });
+        $('.ui.dropdown').dropdown({
+            on: 'hover'
+        });
+
+    </script>
+</body>
+</html>

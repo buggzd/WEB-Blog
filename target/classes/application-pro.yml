@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.28.34.16:3306/blog?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+logging:
+  level:
+    root: warn
+    com.junto.blog2: info
+  file:
+    name: log/blog-dev.log
+server:
+  port: 8081

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head (title)">
+    <meta charset="UTF-8">
+    <!--手机端布局-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}" >挂！</title>
+    <!--引入semantic-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/directorStyle.css" th:href="@{/css/directorStyle.css}">
+    <!--    引入typocss-->
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <!--    引入动画效果-->
+    <link rel="stylesheet" href="../static/css/animate.min.css" th:href="@{/css/animate.min.css}">
+    <!--    引入代码高亮-->
+    <link rel="stylesheet" href="../static/lib/codeHilight/prism.css" th:href="@{/lib/codeHilight/prism.css}">
+    <!--    引入目录-->
+    <link rel="stylesheet" href="../static/lib/catalogue/tocbot.css" th:href="@{/lib/catalogue/tocbot.css}">
+</head>
+
+
+
+<body>
+  <nav th:fragment="menu(n)" class="ui inverted attached segment D-padded-tb-mini D-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="D-item item D-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
+            <a href="#" class="D-item item D-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
+            <a href="#" class="D-item item D-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+            <a href="#" class="D-item item D-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="box icon"></i>归档</a>
+            <a href="#" class="D-item item D-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
+            <div class="D-item right item D-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="Search">
+                    <i class="search icon  link"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button D-position-right-top D-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+    </nav>
+</body>
+<footer th:fragment="footer" class="ui inverted vertical segment D-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column ">
+                <ui class="ui inverted link list">
+                    <div class="item ">
+                        <img src="../static/images/server-icon.png" class="ui rounded image " style="width: 100px" alt="" th:src="@{/images/server-icon.png}">
+                    </div>
+                </ui>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="" class="item">MEME</a>
+                    <a href="" class="item">技术相关</a>
+                    <a href="" class="item">生活相关</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="" class="item">MEME</a>
+                    <a href="" class="item">技术相关</a>
+                    <a href="" class="item">生活相关</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">关于</h4>
+                <p class="D-text-thin D-text-spaced D-opacity-mini">这里是我的个人博客，偶尔会在上面发布一些好玩的有趣的东西，也会有一些技术学习笔记，欢迎你朋友。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider">
+            <p class="D-text-thin D-text-spaced D-opacity-mini">Copyright©2022-2023 Designed by junto  </p>
+        </div>
+    </div>
+</footer>
+<div th:fragment="script">
+    <!--    引入prism.css-->
+    <script src="../static/lib/codeHilight/prism.js" th:src="@{/lib/codeHilight/prism.js}"></script>
+    <!--    引入目录-->
+    <script src="../static/lib/catalogue/tocbot.min.js" th:src="@{/lib/catalogue/tocbot.min.js}"></script>
+    <script>
+        $('.menu.toggle').click(function(){
+            $('.D-item').toggleClass('D-mobile-hide');
+        });
+        $('#btn_pay').popup({
+            popup : $('.payQR.popup'),
+            on : 'click',
+            position: 'bottom center'
+        });
+        $('.catalogue.button').popup({
+            popup : $('.catalogue-container.popup'),
+            on : 'click',
+            position: 'left center'
+        });
+        //initial
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '.js-toc',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: '.js-toc-content',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+    </script>
+</div>
+</html>
